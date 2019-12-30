@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ccp="http://java.sun.com/jsf/composite/cc"
+	template="../template/ui.xhtml">
+	<ui:define name="body">
+		<!-- 		<ccp:ccpicklist  -->
+		<!-- 			list="#{CompositeComponent.cities}" > -->
+		<!-- 			</ccp:ccpicklist> -->
+		<p:pickList 
+			id="FF"
+			value="#{CompositeComponent.cities}" 
+			var="cities"
+			itemLabel="#{cities}"
+			itemValue="#{cities}"
+			converter="PickListConverter"
+		>
+		</p:pickList>
+	</ui:define>
+</ui:composition>
