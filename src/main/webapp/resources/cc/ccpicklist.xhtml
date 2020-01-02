@@ -4,22 +4,38 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 <composite:interface>
 	<composite:attribute name="value" type="java.lang.String"
 		required="false" />
 	<composite:attribute name="list"
 		type="org.primefaces.model.DualListModel" required="true" />
+	<!-- 	complex -->
+	<composite:attribute name="converter" required="false" />
+	<composite:attribute name="itemLabel" required="false" />
+	<composite:attribute name="itemValue" required="false" />
 </composite:interface>
 <composite:implementation>
-<!-- 	<p:pickList  -->
-<!-- 		value="#{cc.attrs.list}"  -->
-<!-- 		var="cities"  -->
-<!-- 		itemLabel="#{cities}" -->
-<!-- 		itemValue="#{cities}"  -->
-<!-- 		effect="fade" -->
-<!-- 		responsive="true"  -->
-<!-- 		showTargetFilter="true" /> -->
+	<c:if test="#{cc.attrs.converter != null}">
+	<c:set var="label" value = "cities.name" />
+		<p:pickList 
+			value="#{cc.attrs.list}" 
+			var="cities"
+			itemLabel="#{cities.name}" 
+			itemValue="#{cities}"
+			effect="fade" 
+			responsive="true" 
+			showTargetFilter="true">
+			<f:converter converterId="#{cc.attrs.converter}"></f:converter>
+		</p:pickList>
 
+	</c:if>
+	<c:if test="#{cc.attrs.converter eq null}">
+		<p:pickList value="#{cc.attrs.list}" var="cities"
+			itemLabel="#{cities}" itemValue="#{cities}" effect="fade"
+			responsive="true" showTargetFilter="true">
+		</p:pickList>
+	</c:if>
 </composite:implementation>
 </html>

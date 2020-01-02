@@ -9,17 +9,16 @@
 	xmlns:ccp="http://java.sun.com/jsf/composite/cc"
 	template="../template/ui.xhtml">
 	<ui:define name="body">
-		<!-- 		<ccp:ccpicklist  -->
-		<!-- 			list="#{CompositeComponent.cities}" > -->
-		<!-- 			</ccp:ccpicklist> -->
-		<p:pickList 
-			id="FF"
-			value="#{CompositeComponent.cities}" 
-			var="cities"
-			itemLabel="#{cities}"
-			itemValue="#{cities}"
-			converter="PickListConverter"
-		>
-		</p:pickList>
+		<h:form>
+			<ccp:ccpicklist 
+				list="#{compositeComponent.cities}">
+			</ccp:ccpicklist>
+			
+			<ccp:ccpicklist 
+				list="#{pickListBean.listModel}"
+                converter="empConverter"
+                itemLabel="name">
+			</ccp:ccpicklist>
+		</h:form>
 	</ui:define>
 </ui:composition>
