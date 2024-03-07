@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="../template/ui.xhtml">
+	<ui:define name="header">
+		<script src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
+			integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
+			crossorigin="anonymous"></script>
+	</ui:define>
+	<ui:define name="body">
+		<h3>Example language</h3>
+		<!-- contacto -->
+		<script>
+            function runRemoteCommand(param1, param2) {
+                var promise = rc([{name: 'param1', value: param1}, {name: 'param2', value: param2}]);
+                promise.then(function (responseData) {
+                    var serverTime = responseData.jqXHR.pfArgs.serverTime;
+                    console.log("Request successful, returned server time is", serverTime);
+                }).catch(function (error) {
+                    console.error("Request failed", error);
+                });
+            }
+        </script>
+
+		<p:remoteCommand name="rc" update="@all"
+			action="#{remoteCommandView.execute}" />
+		<p:commandButton type="button" value="Send" icon="pi pi-refresh"
+			onclick="rc([{name: 'param1', value: 'foo'}, {name: 'param2', value: 'bar'}])" />
+
+
+		<h:form>
+			<!-- 			<my-footer id="webcomponent" language="#{demobean.mylocale}"></my-footer> -->
+
+			<h:commandLink value="English"
+				action="#{localeBean.changeLocale('eu')}" />
+			<h:commandLink value="Español"
+				action="#{localeBean.changeLocale('es')}" />
+
+			<p:commandButton value="English" update="@all"
+				actionListener="#{localeBean.changeLocale('eu')}" />
+			<p:commandButton value="Español" update="@all"
+				actionListener="#{localeBean.changeLocale('es')}" />
+
+			<!-- Add more commandLinks for other languages if needed -->
+		</h:form>
+
+		<h:form>
+			<p:commandButton value="Change Message" action="#{demobean.change}"
+				process="@this" update="messageDisplay" />
+		</h:form>
+
+
+
+		<p:outputPanel id="messageDisplay">
+			<h3>Message: #{demobean.mylocale}</h3>
+			<my-footer></my-footer>
+
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

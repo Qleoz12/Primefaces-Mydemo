@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rewrite-config>
+	<url-mapping id="index">
+		<pattern value="/es/language" />
+		<view-id value="/components/language.xhtml" />
+	</url-mapping>
+	<url-mapping id="index">
+		<pattern value="/eu/language" />
+		<view-id value="/components/language.xhtml" />
+	</url-mapping>
+</rewrite-config>
